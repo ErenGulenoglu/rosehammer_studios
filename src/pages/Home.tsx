@@ -1,4 +1,3 @@
-import React from "react";
 import "../components/global.css";
 import NavigationBar from "../components/NavigationBar";
 import NavigationBarMobile from "../components/NavigationBarMobile";
