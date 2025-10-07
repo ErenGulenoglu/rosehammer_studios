@@ -28,26 +28,26 @@ function LoTA() {
 			</div>
 			<div className="w-full flex flex-col items-center justify-center">
 				<div
-					className="flex flex-col lg:flex-row w-[85%] items-center justify-center py-20 gap-10 lg:py-70 bg-cover bg-center bg-no-repeat bg-blend-overlay bg-[#181818] rounded-b-lg"
+					className="flex flex-col  w-[85%] lg:flex-row items-center justify-center py-20 gap-10 lg:py-70 bg-cover bg-center bg-no-repeat bg-blend-overlay bg-[#181818] rounded-b-lg"
 					//className="flex flex-col w-[85%] items-center justify-center gap-6 py-60  bg-cover bg-center bg-no-repeat bg-blend-overlay bg-[#181818] rounded-lg md:py-80"
 					style={{ backgroundImage: `url(${image3})` }}
 				>
-					<div className="flex flex-col w-[75%] md:w-[50%] items-center justify-center gap-1">
+					<div className="flex flex-col w-[75%] items-center justify-center gap-1">
 						<h1 className="fantasy-text text-white text-3xl text-center">Welcome to</h1>
 						<h1 className="fantasy-text text-white text-3xl underline underline-offset-8 text-center">The Land of The Awakened</h1>
 					</div>
-					<div className="flex w-[75%] md:w-[50%] items-center justify-center">
+					<div className="flex w-[75%] items-center justify-center">
 						<h3 className="fantasy-text text-white italic  max-w-xl text-left text-sm sm:text-md md:text-lg lg:text-xl xl:text-xl">
 							&nbsp;&nbsp;&nbsp;&nbsp;"About twenty years after the War of Flames... The world has lost an Alf tree, and the ruins of the war are still being repaired. The should be protectors of the
 							Somnium are weakened warring with each other. Evil is on the rise siezing the opportunity. Adventurers are needed like never before."
 						</h3>
 					</div>
 				</div>
-				<div className="flex flex-col lg:flex-row w-[85%] items-center justify-center py-20 gap-12 md:gap-0 rounded-lg">
-					<div className="flex flex-col w-[75%] lg:w-[50%] items-center justify-center">
+				<div className="flex flex-col w-[85%] lg:flex-row  items-center justify-center py-20 gap-12 md:gap-0 rounded-lg">
+					<div className="flex flex-col w-[75%] lg:w-[50%] items-center justify-center pb-15 lg:pb-0">
 						<img src={image2} alt="LoTA Art of City" className="w-[55%] min-w-xs rounded-md" />
 					</div>
-					<div className="flex flex-col w-[75%] md:w-[50%] items-left justify-center">
+					<div className="flex flex-col w-[75%] items-left justify-center">
 						<h2 className="fantasy-text scroll-m-20 border-b pb-2 text-3xl tracking-tight first:mt-0">Introduction to The Land of The Awakened</h2>
 						<p className="leading-7 [&:not(:first-child)]:mt-6">
 							The Land of The Awakened is a religious term brought by The Church of The Eight, which shapes the political boundaries of the habitation space of the sleepers—creations of the eight
@@ -72,10 +72,10 @@ function LoTA() {
 						</p>
 					</div>
 				</div>
-				<div className="flex flex-col lg:flex-row w-[85%] items-center justify-center py-20 gap-12 md:gap-0 rounded-lg">
+				<div className="flex flex-col lg:flex-row w-[85%] items-center justify-center pb-20 gap-12 md:gap-0 rounded-lg">
 					<div className="flex flex-col w-[75%] lg:w-[50%] items-start justify-start gap-6">
 						<h3 className="fantasy-text scroll-m-20 text-2xl font-semibold tracking-tight underline">Download Introductionary Material for LoTA</h3>
-						<div className="flex w-full items-start justify-start">
+						<div className="flex w-full items-start justify-start pb-20 lg:pb-0">
 							<Button
 								onClick={async () => {
 									const res = await api.get("/api/download/paper-structure.pdf", { responseType: "blob" });
