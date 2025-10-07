@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import NotFound from "./pages/NotFound";
+// import NotFound from "./pages/NotFound";
 import LoTA from "./pages/LoTA";
 
 import { ThemeProvider } from "./components/theme-provider";
@@ -13,7 +13,7 @@ function App() {
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="/lota" element={<LoTA />} />
-						<Route path="*" element={<NotFound />} />
+						{/* <Route path="*" element={<NotFound />} /> */}
 					</Routes>
 				</BrowserRouter>
 			</div>
