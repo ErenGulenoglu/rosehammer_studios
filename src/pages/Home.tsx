@@ -25,7 +25,7 @@ function Home() {
 					style={{ backgroundImage: `url(${banner})` }}
 				>
 					<h1 className="fantasy-text text-white text-4xl sm:text-4xl md:text-6xl lg:text-8xl xl:text-8xl">Somnium</h1>
-					<h3 className="fantasy-text text-white italic  max-w-4xl text-center text-sm sm:text-md md:text-lg lg:text-xl xl:text-xl">
+					<h3 className="fantasy-text w-[75%] text-white italic text-center text-sm sm:text-md md:text-lg lg:text-xl xl:text-xl">
 						The apocalypse has long since come, the Wanderer has forgotten to claim their souls, and now they struggle to be reborn from their own ashes.
 					</h3>
 				</div>
