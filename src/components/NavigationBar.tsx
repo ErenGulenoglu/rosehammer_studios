@@ -19,7 +19,7 @@ function NavigationBar() {
 					<div className="flex justify-center">
 						<NavigationMenuItem>
 							<Link to="/">
-								<h3 className="fantasy-text sm:text-md md:text-lg lg:text-xl xl:text-2xl whitespace-nowrap">Rosehammer Studios</h3>
+								<h3 className="fantasy-text [text-shadow:0_0_10px_rgba(255,255,255,0.4)] sm:text-md md:text-lg lg:text-xl xl:text-2xl whitespace-nowrap">Rosehammer Studios</h3>
 							</Link>
 						</NavigationMenuItem>
 					</div>
