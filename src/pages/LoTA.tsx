@@ -29,10 +29,10 @@ function LoTA() {
 			</div>
 			<div className="w-full flex flex-col items-center justify-center">
 				<div
-					className="flex flex-col w-[85%] items-center justify-center py-20 gap-10 bg-cover bg-center bg-no-repeat bg-blend-overlay bg-[#181818] rounded-b-lg lg:py-60"
+					className="flex flex-col w-[85%] items-center justify-center py-20 bg-cover bg-center bg-no-repeat bg-blend-overlay bg-[#181818] rounded-b-lg gap-5 lg:gap-10 lg:py-60"
 					style={{ backgroundImage: `url(${image3})` }}
 				>
-					<div className="flex flex-col w-[75%] items-center justify-center gap-1 lg:gap-5">
+					<div className="flex flex-col w-[75%] items-center justify-center">
 						<h1 className="fantasy-text text-white font-bold text-center opacity-50 text-2xl md:text-3xl lg:text-6xl">Welcome to</h1>
 						<FadeInTextAnimation>
 							<h1 className="fantasy-text text-white font-bold underline underline-offset-8 text-center text-2xl md:text-3xl lg:text-6xl">The Land of The Awakened</h1>
@@ -46,7 +46,7 @@ function LoTA() {
 					</div>
 				</div>
 				<div className="flex flex-col w-[85%] lg:flex-row  items-center justify-center py-20 gap-12 md:gap-0 rounded-lg">
-					<div className="flex flex-col w-[75%] lg:w-[50%] items-center justify-center pb-15 lg:pb-0">
+					<div className="flex flex-col w-[75%] lg:w-[50%] items-center justify-center md:pb-10 lg:pb-0">
 						<img src={image2} alt="LoTA Art of City" className="w-[55%] min-w-xs rounded-md" />
 					</div>
 					<div className="flex flex-col w-[75%] items-left justify-center gap-6">
