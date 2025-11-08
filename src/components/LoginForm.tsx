@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
 
 import api from "@/api";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "./AuthContext";
 
