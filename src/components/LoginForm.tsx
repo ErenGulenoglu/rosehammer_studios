@@ -17,7 +17,6 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
 	const [error, setError] = useState("");
 	const [hasError, setHasError] = useState(false);
 	const [showLoading, setShowLoading] = useState(false);
-	const navigate = useNavigate();
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
