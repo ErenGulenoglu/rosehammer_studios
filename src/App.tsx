@@ -21,14 +21,7 @@ function App() {
 							<Route path="/lota" element={<LoTA />} />
 
 							{/* Public Route */}
-							<Route
-								path="/login"
-								element={
-									<PublicRoute>
-										<Login />
-									</PublicRoute>
-								}
-							/>
+							<Route path="/login" element={<Login />} />
 
 							{/* <Route path="*" element={<NotFound />} /> */}
 						</Routes>
