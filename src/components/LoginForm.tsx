@@ -8,6 +8,7 @@ import { Spinner } from "@/components/ui/spinner";
 import api from "@/api";
 import { useState } from "react";
 import { useAuth } from "./AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
 	const { setUser } = useAuth(); // AuthContext to store access token + user info
@@ -16,6 +17,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
 	const [error, setError] = useState("");
 	const [hasError, setHasError] = useState(false);
 	const [showLoading, setShowLoading] = useState(false);
+	const navigate = useNavigate();
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -52,7 +54,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
 			});
 
 			setError("");
-			// navigate("/"); // redirect after login
+			navigate("/"); // redirect after login
 		} catch (err) {
 			console.error("Login failed:", err);
 			setError("Wrong email or password.");
