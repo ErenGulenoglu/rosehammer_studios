@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import LoTA from "./pages/LoTA";
 import Login from "./pages/Login";
 import { AuthProvider } from "./components/AuthContext";
-import { PublicRoute } from "./components/RoutesGuard";
+// import { PublicRoute } from "./components/RoutesGuard";
 import { ThemeProvider } from "./components/theme-provider";
 
 function App() {
