@@ -58,11 +58,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	// On mount, check if a user is logged in
 	useEffect(() => {
 		const initAuth = async () => {
-			console.log("here");
 			const access = await refreshAccessToken();
 			console.log(user);
-			console.log("hero");
-			console.log(access + "asd");
+
 			if (access) {
 				// Fetch user profile using the access token
 				const profileRes = await api.get("/users/me/", {
