@@ -2,6 +2,7 @@ import "../components/global.css";
 import NavigationBar from "../components/NavigationBar";
 import NavigationBarMobile from "../components/NavigationBarMobile";
 import Footer from "@/components/Footer";
+
 import { useEffect } from "react";
 import banner from "../assets/oath_of_the_horatii.png";
 

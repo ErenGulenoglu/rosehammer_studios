@@ -1,7 +1,10 @@
 import { NavigationMenu, NavigationMenuItem, NavigationMenuList, NavigationMenuLink } from "@/components/ui/navigation-menu";
 import { Link } from "react-router-dom";
+import AvatarMenu from "./AvatarMenu";
+import { useAuth } from "../components/AuthContext";
 
 function NavigationBar() {
+	const { user } = useAuth();
 	return (
 		<div className="sticky top-0 flex w-full justify-center items-center py-6 bg-[#0a0a0a]">
 			<NavigationMenu>
@@ -34,6 +37,11 @@ function NavigationBar() {
 					</div>
 				</NavigationMenuList>
 			</NavigationMenu>
+			{user && (
+				<div className="absolute right-[10%]">
+					<AvatarMenu />
+				</div>
+			)}
 		</div>
 	);
 }
