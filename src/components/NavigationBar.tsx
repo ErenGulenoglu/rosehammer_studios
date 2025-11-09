@@ -1,5 +1,6 @@
 import { NavigationMenu, NavigationMenuItem, NavigationMenuList, NavigationMenuLink } from "@/components/ui/navigation-menu";
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import AvatarMenu from "./AvatarMenu";
 import { useAuth } from "../components/AuthContext";
 
@@ -37,10 +38,17 @@ function NavigationBar() {
 					</div>
 				</NavigationMenuList>
 			</NavigationMenu>
-			{user && (
+			{user ? (
 				<div className="absolute right-[10%]">
 					<AvatarMenu />
 				</div>
+			) : (
+				// <p className="absolute right-[10%]">asd</p>
+				<Link className="absolute right-[10%]" to="/login">
+					<Button className="cursor-pointer" variant={"outline"}>
+						Login
+					</Button>
+				</Link>
 			)}
 		</div>
 	);

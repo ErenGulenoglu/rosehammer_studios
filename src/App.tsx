@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 // import NotFound from "./pages/NotFound";
 import LoTA from "./pages/LoTA";
 import Login from "./pages/Login";
+import Signup from "./pages/SignUp";
 import { AuthProvider } from "./components/AuthContext";
 import { PublicRoute } from "./components/RoutesGuard";
 import { ThemeProvider } from "./components/theme-provider";
@@ -14,10 +15,7 @@ function App() {
 				<div>
 					<BrowserRouter>
 						<Routes>
-							{/* Public Route */}
 							<Route path="/" element={<Home />} />
-
-							{/* Public Route */}
 							<Route path="/lota" element={<LoTA />} />
 
 							{/* Public Route */}
@@ -26,6 +24,16 @@ function App() {
 								element={
 									<PublicRoute>
 										<Login />
+									</PublicRoute>
+								}
+							/>
+
+							{/* Public Route */}
+							<Route
+								path="/signup"
+								element={
+									<PublicRoute>
+										<Signup />
 									</PublicRoute>
 								}
 							/>

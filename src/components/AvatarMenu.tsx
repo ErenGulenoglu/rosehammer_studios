@@ -8,8 +8,6 @@ import api from "@/api";
 function AvatarMenu() {
 	const { user, setUser, loading } = useAuth();
 	const navigate = useNavigate();
-	//console.log("User in AvatarMenu:", user);
-	console.log(user?.email);
 
 	const handleLogout = async () => {
 		try {

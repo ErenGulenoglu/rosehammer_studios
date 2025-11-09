@@ -15,10 +15,10 @@ function Home() {
 
 	return (
 		<div>
-			<div className="sticky top-0 hidden md:block z-50">
+			<div className="sticky top-0 hidden lg:block z-50">
 				<NavigationBar />
 			</div>
-			<div className="sticky top-0 block md:hidden z-50">
+			<div className="sticky top-0 block lg:hidden z-50">
 				<NavigationBarMobile />
 			</div>
 

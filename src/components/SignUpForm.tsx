@@ -1,3 +1,4 @@
+import React from "react";
 import { GalleryVerticalEnd } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -6,18 +7,23 @@ import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
 
 import api from "@/api";
-import { useState } from "react";
-import { useAuth } from "./AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
-	const { setUser } = useAuth(); // AuthContext to store access token + user info
+export function SignUpForm({ className, ...props }: React.ComponentProps<"div">) {
+	const [firstName, setFirstName] = useState("");
+	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [passwordConfirm, setPasswordConfirm] = useState("");
 	const [error, setError] = useState("");
 	const [hasError, setHasError] = useState(false);
 	const [showLoading, setShowLoading] = useState(false);
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		document.title = "Sign Up";
+	}, []);
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -28,37 +34,27 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
 			// ------------------------
 			// 1. Login: backend sets HttpOnly refresh token cookie
 			// ------------------------
-			const accessRes = await api.post(
-				"/users/token/",
-				{ email, password },
+			const signupRes = await api.post(
+				"/users/signup/",
+				{ first_name: firstName, last_name: lastName, email, password, passwordConfirm }, // everything matches with serialzier names
 				{ withCredentials: true } // important: send/receive cookies
 			);
-
-			const access = accessRes.data.access; // access token from backend
-
-			// ------------------------
-			// 2. Fetch user profile using access token
-			// ------------------------
-			const profileRes = await api.get("/users/me/", {
-				headers: { Authorization: `Bearer ${access}` }, // send access token in header
-			});
-
-			// ------------------------
-			// 3. Store user info + access token in memory (AuthContext)
-			// ------------------------
-			setUser({
-				token: access,
-				email: profileRes.data.email,
-				first_name: profileRes.data.first_name,
-				last_name: profileRes.data.last_name,
-			});
-
+			console.log("Signup successful:", signupRes.data);
 			setError("");
-			navigate("/"); // redirect after login
-		} catch (err) {
-			console.error("Login failed:", err);
-			setError("Wrong email or password.");
-			setHasError(true);
+			navigate("/login"); // redirect after login
+		} catch (err: any) {
+			console.error("Signup failed:", err);
+
+			// DRF validation errors come back as JSON
+			if (err.response?.data) {
+				const data = err.response.data;
+				// Combine all error messages (or display per field)
+				const messages = Object.values(data).flat().join(" ");
+				setError(messages);
+				setHasError(true);
+			} else {
+				setError("Something went wrong during signup.");
+			}
 		} finally {
 			setShowLoading(false);
 		}
@@ -75,11 +71,19 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
 							</div>
 							<span className="sr-only">Logo</span>
 						</a>
-						<h1 className="text-xl font-bold">Welcome to Rosehammer Studios</h1>
-						<FieldDescription>
-							Don&apos;t have an account? <Link to="/signup">Sign up</Link>
-						</FieldDescription>
+						<h1 className="text-xl font-bold">Sign Up</h1>
+						<FieldDescription>Let's get started. Fill in the details below to create your account.</FieldDescription>
 					</div>
+
+					<Field>
+						<FieldLabel htmlFor="firstName">First Name</FieldLabel>
+						<Input id="firstName" type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="John" required />
+					</Field>
+
+					<Field>
+						<FieldLabel htmlFor="lastName">Last Name</FieldLabel>
+						<Input id="lastName" type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Smith" required />
+					</Field>
 
 					<Field>
 						<FieldLabel htmlFor="email">Email</FieldLabel>
@@ -91,6 +95,11 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
 						<Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
 					</Field>
 
+					<Field>
+						<FieldLabel htmlFor="passwordConfirm">Confirm Password</FieldLabel>
+						<Input id="passwordConfirm" type="password" value={passwordConfirm} onChange={(e) => setPasswordConfirm(e.target.value)} required />
+					</Field>
+
 					{hasError && <p className="text-red-600">{error}</p>}
 
 					{showLoading ? (
@@ -100,7 +109,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
 					) : (
 						<Field>
 							<Button type="submit" className="cursor-pointer">
-								Login
+								Sign Up
 							</Button>
 						</Field>
 					)}

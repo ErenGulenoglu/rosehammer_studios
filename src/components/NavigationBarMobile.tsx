@@ -3,10 +3,13 @@ import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from "@/compon
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
-
 import { Link } from "react-router-dom";
 
+import AvatarMenu from "./AvatarMenu";
+import { useAuth } from "../components/AuthContext";
+
 function NavigationBarMobile() {
+	const { user } = useAuth();
 	return (
 		<div className="sticky top-0 flex w-full justify-center items-center py-6 bg-[#0a0a0a]">
 			<NavigationMenu>
@@ -53,6 +56,20 @@ function NavigationBarMobile() {
 							</Link>
 						</NavigationMenuItem>
 					</div>
+
+					{/* Right */}
+					{user ? (
+						<div className="absolute right-[10%]">
+							<AvatarMenu />
+						</div>
+					) : (
+						// <p className="absolute right-[10%]">asd</p>
+						<Link className="absolute right-[10%]" to="/login">
+							<Button className="cursor-pointer" variant={"outline"}>
+								Login
+							</Button>
+						</Link>
+					)}
 				</NavigationMenuList>
 			</NavigationMenu>
 		</div>
