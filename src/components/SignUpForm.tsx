@@ -8,7 +8,7 @@ import { Spinner } from "@/components/ui/spinner";
 
 import api from "@/api";
 import { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export function SignUpForm({ className, ...props }: React.ComponentProps<"div">) {
 	const [firstName, setFirstName] = useState("");
@@ -21,7 +21,7 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
 	const [showLoading, setShowLoading] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(false);
 	const [showConfirmation, setShowConfirmation] = useState(false);
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		document.title = "Sign Up";
@@ -42,10 +42,10 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
 				{ first_name: firstName, last_name: lastName, email, password, passwordConfirm }, // everything matches with serialzier names
 				{ withCredentials: true } // important: send/receive cookies
 			);
-			console.log("Signup successful:", signupRes.data);
+			// console.log("Signup successful:", signupRes.data);
 			setError("");
-			setShowConfirmation(true);
-			// navigate("/login"); // redirect after login
+			// setShowConfirmation(true); // add this once you move to non-free tier
+			navigate("/login"); // redirect after login
 		} catch (err: any) {
 			console.error("Signup failed:", err);
 			setIsDisabled(false);
@@ -64,15 +64,15 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
 		}
 	};
 
-	async function handleResend() {
-		try {
-			const res = await api.post("/users/resend-verification/", { email }, { withCredentials: true });
+	// async function handleResend() {
+	// 	try {
+	// 		const res = await api.post("/users/resend-verification/", { email }, { withCredentials: true });
 
-			console.log(res.data);
-		} catch (err: any) {
-			console.log(err.response?.data?.detail || "Something went wrong.");
-		}
-	}
+	// 		console.log(res.data);
+	// 	} catch (err: any) {
+	// 		console.log(err.response?.data?.detail || "Something went wrong.");
+	// 	}
+	// }
 
 	return (
 		<div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -132,7 +132,8 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
 
 			{showConfirmation ? (
 				<div className="flex flex-col items-center gap-4 text-center">
-					<Button onClick={handleResend} className="w-full cursor-pointer">
+					<Button className="w-full cursor-pointer">
+						{/* onClick={handleResend} add this once you move to non-free tier*/}
 						Resend Verification Email
 					</Button>
 					<p className="text-green-600">A confirmation email has been sent to activate your account.</p>
