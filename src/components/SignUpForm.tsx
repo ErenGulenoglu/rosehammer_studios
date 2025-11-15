@@ -8,7 +8,7 @@ import { Spinner } from "@/components/ui/spinner";
 
 import api from "@/api";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 export function SignUpForm({ className, ...props }: React.ComponentProps<"div">) {
 	const [firstName, setFirstName] = useState("");
@@ -21,7 +21,7 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
 	const [showLoading, setShowLoading] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(false);
 	const [showConfirmation, setShowConfirmation] = useState(false);
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 
 	useEffect(() => {
 		document.title = "Sign Up";
