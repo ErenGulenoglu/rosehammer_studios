@@ -21,10 +21,10 @@ function LoTA() {
 
 	return (
 		<div className="flex flex-col items-center justify-center">
-			<div className="sticky top-0 w-full hidden md:block z-50">
+			<div className="w-full sticky top-0 hidden lg:block z-50">
 				<NavigationBar />
 			</div>
-			<div className="sticky top-0 w-full block md:hidden z-50">
+			<div className="w-full  sticky top-0 block lg:hidden z-50">
 				<NavigationBarMobile />
 			</div>
 			<div className="w-full flex flex-col items-center justify-center">

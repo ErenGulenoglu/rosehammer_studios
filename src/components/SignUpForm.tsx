@@ -19,6 +19,8 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
 	const [error, setError] = useState("");
 	const [hasError, setHasError] = useState(false);
 	const [showLoading, setShowLoading] = useState(false);
+	const [isDisabled, setIsDisabled] = useState(false);
+	const [showConfirmation, setShowConfirmation] = useState(false);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -30,6 +32,7 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
 		try {
 			setShowLoading(true);
 			setHasError(false);
+			setIsDisabled(true);
 
 			// ------------------------
 			// 1. Login: backend sets HttpOnly refresh token cookie
@@ -41,10 +44,11 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
 			);
 			console.log("Signup successful:", signupRes.data);
 			setError("");
-			navigate("/login"); // redirect after login
+			setShowConfirmation(true);
+			// navigate("/login"); // redirect after login
 		} catch (err: any) {
 			console.error("Signup failed:", err);
-
+			setIsDisabled(false);
 			// DRF validation errors come back as JSON
 			if (err.response?.data) {
 				const data = err.response.data;
@@ -59,6 +63,16 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
 			setShowLoading(false);
 		}
 	};
+
+	async function handleResend() {
+		try {
+			const res = await api.post("/users/resend-verification/", { email }, { withCredentials: true });
+
+			console.log(res.data);
+		} catch (err: any) {
+			console.log(err.response?.data?.detail || "Something went wrong.");
+		}
+	}
 
 	return (
 		<div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -77,27 +91,27 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
 
 					<Field>
 						<FieldLabel htmlFor="firstName">First Name</FieldLabel>
-						<Input id="firstName" type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="John" required />
+						<Input disabled={isDisabled} id="firstName" type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="John" required />
 					</Field>
 
 					<Field>
 						<FieldLabel htmlFor="lastName">Last Name</FieldLabel>
-						<Input id="lastName" type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Smith" required />
+						<Input disabled={isDisabled} id="lastName" type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Smith" required />
 					</Field>
 
 					<Field>
 						<FieldLabel htmlFor="email">Email</FieldLabel>
-						<Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="m@example.com" required />
+						<Input disabled={isDisabled} id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="m@example.com" required />
 					</Field>
 
 					<Field>
 						<FieldLabel htmlFor="password">Password</FieldLabel>
-						<Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+						<Input disabled={isDisabled} id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
 					</Field>
 
 					<Field>
 						<FieldLabel htmlFor="passwordConfirm">Confirm Password</FieldLabel>
-						<Input id="passwordConfirm" type="password" value={passwordConfirm} onChange={(e) => setPasswordConfirm(e.target.value)} required />
+						<Input disabled={isDisabled} id="passwordConfirm" type="password" value={passwordConfirm} onChange={(e) => setPasswordConfirm(e.target.value)} required />
 					</Field>
 
 					{hasError && <p className="text-red-600">{error}</p>}
@@ -106,8 +120,8 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
 						<div className="flex flex-col items-center text-center">
 							<Spinner />
 						</div>
-					) : (
-						<Field>
+					) : showConfirmation ? null : (
+						<Field className="text-center">
 							<Button type="submit" className="cursor-pointer">
 								Sign Up
 							</Button>
@@ -116,6 +130,14 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
 				</FieldGroup>
 			</form>
 
+			{showConfirmation ? (
+				<div className="flex flex-col items-center gap-4 text-center">
+					<Button onClick={handleResend} className="w-full cursor-pointer">
+						Resend Verification Email
+					</Button>
+					<p className="text-green-600">A confirmation email has been sent to activate your account.</p>
+				</div>
+			) : null}
 			<FieldDescription className="px-6 text-center">
 				By clicking continue, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
 			</FieldDescription>

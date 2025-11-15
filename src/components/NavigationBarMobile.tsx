@@ -42,6 +42,15 @@ function NavigationBarMobile() {
 												</Button>
 											</Link>
 										</div>
+										{!user ? (
+											<div className="grid gap-3">
+												<Link to="/login">
+													<Button className="w-full cursor-pointer" variant="outline">
+														Login
+													</Button>
+												</Link>
+											</div>
+										) : null}
 									</div>
 								</SheetContent>
 							</Sheet>
@@ -62,14 +71,7 @@ function NavigationBarMobile() {
 						<div className="absolute right-[10%]">
 							<AvatarMenu />
 						</div>
-					) : (
-						// <p className="absolute right-[10%]">asd</p>
-						<Link className="absolute right-[10%]" to="/login">
-							<Button className="cursor-pointer" variant={"outline"}>
-								Login
-							</Button>
-						</Link>
-					)}
+					) : null}
 				</NavigationMenuList>
 			</NavigationMenu>
 		</div>

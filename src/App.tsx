@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import LoTA from "./pages/LoTA";
 import Login from "./pages/Login";
 import Signup from "./pages/SignUp";
+import VerifyEmail from "./pages/VerifyEmail";
 import { AuthProvider } from "./components/AuthContext";
 import { PublicRoute } from "./components/RoutesGuard";
 import { ThemeProvider } from "./components/theme-provider";
@@ -34,6 +35,15 @@ function App() {
 								element={
 									<PublicRoute>
 										<Signup />
+									</PublicRoute>
+								}
+							/>
+
+							<Route
+								path="/verify-email"
+								element={
+									<PublicRoute>
+										<VerifyEmail />
 									</PublicRoute>
 								}
 							/>
