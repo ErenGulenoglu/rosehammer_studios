@@ -8,7 +8,7 @@ import { Spinner } from "@/components/ui/spinner";
 
 import api from "@/api";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 export function SignUpForm({ className, ...props }: React.ComponentProps<"div">) {
 	const [firstName, setFirstName] = useState("");
@@ -21,7 +21,7 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
 	const [showLoading, setShowLoading] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(false);
 	const [showConfirmation, setShowConfirmation] = useState(false);
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 
 	useEffect(() => {
 		document.title = "Sign Up";
@@ -42,10 +42,10 @@ export function SignUpForm({ className, ...props }: React.ComponentProps<"div">)
 				{ first_name: firstName, last_name: lastName, email, password, passwordConfirm }, // everything matches with serialzier names
 				{ withCredentials: true } // important: send/receive cookies
 			);
-			// console.log("Signup successful:", signupRes.data);
+			console.log("Signup successful:", signupRes.data);
 			setError("");
-			// setShowConfirmation(true); // add this once you move to non-free tier
-			navigate("/login"); // redirect after login
+			setShowConfirmation(true); // add this once you move to non-free tier
+			// navigate("/login"); // redirect after login
 		} catch (err: any) {
 			console.error("Signup failed:", err);
 			setIsDisabled(false);
